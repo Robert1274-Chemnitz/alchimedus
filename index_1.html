@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alchimedus – Strategische Unternehmensberatung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1a3557;
+      --navy-dark: #102240;
+      --navy-lt:   #2c4f7c;
+      --accent:    #e8a020;
+      --accent-lt: #f5c050;
+      --white:     #ffffff;
+      --off-white: #f4f6f9;
+      --light-bg:  #eef1f5;
+      --text:      #2d3748;
+      --text-mid:  #4a5568;
+      --text-light:#718096;
+      --border:    #d8e2ee;
+      --serif:     'Merriweather', Georgia, serif;
+      --sans:      'Source Sans 3', 'Segoe UI', sans-serif;
+      --radius:    4px;
+      --shadow:    0 4px 20px rgba(26,53,87,0.10);
+      --shadow-lg: 0 8px 40px rgba(26,53,87,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid var(--navy);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 72px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius);
+    }
+    .logo-icon svg { width: 24px; height: 24px; fill: var(--white); }
+    .logo-text {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+    .logo-text span { display: block; font-weight: 300; font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+    nav ul { list-style: none; display: flex; gap: 0.2rem; align-items: center; }
+    nav ul li a {
+      display: block;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.18s, color 0.18s;
+    }
+    nav ul li a:hover { background: var(--off-white); }
+    nav ul li a.active { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--white) !important;
+      padding: 0.5rem 1.3rem !important;
+      border-radius: var(--radius) !important;
+      transition: background 0.18s !important;
+    }
+    .nav-cta:hover { background: var(--accent-lt) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-lt) 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 80% at 90% 50%, rgba(232,160,32,0.12) 0%, transparent 65%),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.015) 40px,
+          rgba(255,255,255,0.015) 41px
+        );
+    }
+    .hero-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 3fr 2fr;
+      align-items: center; gap: 4rem;
+      padding: 6rem 2rem 5rem;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(232,160,32,0.18);
+      border: 1px solid rgba(232,160,32,0.45);
+      border-radius: 2px;
+      color: var(--accent-lt);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      margin-bottom: 1.6rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.4rem;
+      color: var(--white);
+    }
+    .hero h1 strong { color: var(--accent-lt); font-weight: 700; }
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.8);
+      max-width: 52ch;
+      margin-bottom: 2.4rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 0.85rem 2rem;
+      border: none; border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent-lt); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.85rem 2rem;
+      border: 2px solid rgba(255,255,255,0.45);
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* hero right: trust box */
+    .hero-trust {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      backdrop-filter: blur(6px);
+    }
+    .hero-trust-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-lt);
+      margin-bottom: 1.4rem;
+    }
+    .trust-row {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .trust-row:last-child { border-bottom: none; }
+    .trust-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(232,160,32,0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .trust-icon svg { width: 18px; height: 18px; stroke: var(--accent-lt); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .trust-text strong { display: block; font-size: 0.92rem; font-weight: 700; color: var(--white); }
+    .trust-text span { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+    /* ─── INTRO STRIP ─── */
+    .intro-strip {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+    }
+    .intro-strip-inner {
+      max-width: 1140px; margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--navy);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .intro-strip h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 1rem;
+    }
+    .intro-strip p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      max-width: 74ch;
+    }
+
+    /* ─── VORTEILE ─── */
+    .advantages {
+      padding: 5rem 0;
+      background: var(--white);
+    }
+    .section-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 0.8rem;
+    }
+    .section-header p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .adv-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--navy);
+      border-radius: var(--radius);
+      padding: 2.2rem 2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .adv-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .adv-card-icon {
+      width: 52px; height: 52px;
+      background: var(--navy);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.4rem;
+    }
+    .adv-card-icon svg {
+      width: 26px; height: 26px;
+      stroke: var(--white); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .adv-card h3 {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 0.7rem;
+    }
+    .adv-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+    }
+    .adv-card-more {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+      transition: gap 0.15s, color 0.15s;
+    }
+    .adv-card-more:hover { gap: 0.6rem; color: var(--accent); }
+    .adv-card-more::after { content: '→'; }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      background: var(--navy);
+      padding: 5.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: rgba(232,160,32,0.08);
+      border-radius: 50%;
+    }
+    .cta-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+      position: relative; z-index: 1;
+    }
+    .cta-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .cta-left p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 2rem;
+    }
+    .cta-checklist { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .cta-checklist li {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.85);
+    }
+    .cta-checklist li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: rgba(232,160,32,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: var(--accent-lt);
+      font-weight: 700;
+      line-height: 20px;
+      text-align: center;
+    }
+    .cta-form-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2.4rem 2.2rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .cta-form-box h3 {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 1.6rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 0.9rem;
+      font-family: var(--sans);
+      font-size: 0.93rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.9rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 0.6rem;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--accent); }
+    .form-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.8rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.6);
+      padding: 2.2rem 0;
+      font-size: 0.82rem;
+    }
+    .footer-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--accent-lt); }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-left > * { animation: fadeUp 0.6s ease both; }
+    .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-left > *:nth-child(2) { animation-delay: 0.18s; }
+    .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero-left > *:nth-child(4) { animation-delay: 0.42s; }
+    .hero-trust { animation: fadeUp 0.7s 0.35s ease both; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .adv-grid { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+      nav ul { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 20h20L12 2zm0 4l6.9 12H5.1L12 6z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          Alchimedus
+          <span>Unternehmensberatung</span>
+        </div>
+      </a>
+      <ul>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#vorteile">Vorteile</a></li>
+        <li><a href="#kontakt" class="nav-cta">Kontakt aufnehmen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Strategische Unternehmensberatung</p>
+        <h1>Beratung mit<br /><strong>klarem Kompass</strong> –<br />für Ihren Geschäftserfolg.</h1>
+        <p class="hero-sub">
+          Alchimedus begleitet Unternehmen durch Gründung, Wachstum, Nachfolge und Wandel – mit unternehmerischer Erfahrung, konkreten Lösungen und persönlichem Einsatz.
+        </p>
+        <div class="hero-btns">
+          <a href="#kontakt" class="btn-primary">Erstgespräch vereinbaren</a>
+          <a href="#vorteile" class="btn-outline">Mehr erfahren</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-trust">
+          <p class="hero-trust-label">Ihre Vorteile auf einen Blick</p>
+          <div class="trust-row">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Persönliche Beratung</strong>
+              <span>Kein anonymes Beraterteam – immer ein direkter Ansprechpartner</span>
+            </div>
+          </div>
+          <div class="trust-row">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Praxisnahe Lösungen</strong>
+              <span>Strategien, die im Alltag funktionieren – nicht nur auf dem Papier</span>
+            </div>
+          </div>
+          <div class="trust-row">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Mittelstandserfahrung</strong>
+              <span>Über 18 Jahre Erfahrung mit kleinen und mittelständischen Unternehmen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro-strip" id="leistungen">
+    <div class="intro-strip-inner">
+      <span class="section-tag">Was wir tun</span>
+      <h2>Wir beraten dort, wo es wirklich zählt.</h2>
+      <p>
+        Alchimedus steht für substanzielle Unternehmensberatung – fernab von Standardlösungen und Folienschlachten. Wir verbinden analytische Tiefe mit unternehmerischer Bodenständigkeit und liefern belastbare Grundlagen für Ihre Entscheidungen.
+      </p>
+    </div>
+  </section>
+
+  <!-- VORTEILE -->
+  <section class="advantages" id="vorteile">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag">Unsere Stärken</span>
+        <h2>Drei gute Gründe, mit uns zu arbeiten</h2>
+        <p>Wir bringen analytische Schärfe, praktische Umsetzungsstärke und echte Mittelstandsnähe in jedes Mandat.</p>
+      </div>
+      <div class="adv-grid">
+
+        <div class="adv-card">
+          <div class="adv-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Analytische Schärfe</h3>
+          <p>Wir diagnostizieren präzise – datenbasiert, ohne Schönfärberei. Unsere Analysen legen den Finger in die Wunde und zeigen auf, wo wirklicher Handlungsbedarf besteht.</p>
+          <a href="#kontakt" class="adv-card-more">Mehr erfahren</a>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-card-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Umsetzungsstärke</h3>
+          <p>Konzepte ohne Umsetzung sind Makulatur. Wir begleiten Veränderungsprozesse aktiv – mit klaren Meilensteinen, messbaren Ergebnissen und offenem Feedback.</p>
+          <a href="#kontakt" class="adv-card-more">Mehr erfahren</a>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Mittelstandsnähe</h3>
+          <p>Kein Berater-Latein, keine anonymen Teams. Bei uns kennt jeder Ansprechpartner Ihr Unternehmen persönlich – und spricht Ihre Sprache.</p>
+          <a href="#kontakt" class="adv-card-more">Mehr erfahren</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="kontakt">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <span class="section-tag" style="border-color:var(--accent);color:var(--accent-lt);">Erstgespräch</span>
+        <h2>Bereit für das entscheidende Gespräch?</h2>
+        <p>Keine unverbindliche Warteschleife – sondern ein konkretes, vorbereitetes Gespräch über Ihre Situation. Kostenlos. In 30 Minuten wissen wir beide mehr.</p>
+        <ul class="cta-checklist">
+          <li>Kostenfreies Erstgespräch ohne Verpflichtung</li>
+          <li>Direkte Antworten auf Ihre Fragen</li>
+          <li>Schnelle Rückmeldung innerhalb von 24 Stunden</li>
+          <li>Vertrauliche Behandlung aller Informationen</li>
+        </ul>
+      </div>
+      <div class="cta-form-box">
+        <h3>Anfrage senden</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Vorname</label>
+            <input type="text" placeholder="Max" />
+          </div>
+          <div class="form-group">
+            <label>Nachname</label>
+            <input type="text" placeholder="Mustermann" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" placeholder="max@beispiel.de" />
+        </div>
+        <div class="form-group">
+          <label>Unternehmen &amp; Branche</label>
+          <input type="text" placeholder="Musterfirma GmbH · Handel" />
+        </div>
+        <div class="form-group">
+          <label>Ihr Anliegen</label>
+          <textarea placeholder="Kurze Beschreibung Ihrer Herausforderung …"></textarea>
+        </div>
+        <button type="button" class="form-submit">Anfrage senden →</button>
+        <p class="form-note">🔒 Ihre Daten werden vertraulich behandelt und nicht weitergegeben.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Alchimedus Unternehmensberatung</span>
+      <span>© 2026 Alchimedus GmbH · Chemnitz</span>
+      <div class="footer-links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
